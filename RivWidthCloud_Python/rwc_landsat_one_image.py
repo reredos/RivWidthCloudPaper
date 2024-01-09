@@ -1,5 +1,6 @@
 if __name__ == "__main__":
     import ee
+    import os
     import numpy as np
     import getopt
     import argparse
@@ -95,7 +96,7 @@ if __name__ == "__main__":
     RADIUS = args.BUFFER
     ROI_NAME = args.POINT_NAME
 
-    ee.Initialize()
+    ee.Initialize(project=os.getenv("EEPROJ"))
 
     # start of program
     img = id2Img(IMG_ID)
