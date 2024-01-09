@@ -1,10 +1,7 @@
 if __name__ == "__main__":
     import ee
     import os
-    import numpy as np
-    import getopt
     import argparse
-    import sys
     from functions_landsat import id2Img
     from rwc_landsat import rwGenSR
 
