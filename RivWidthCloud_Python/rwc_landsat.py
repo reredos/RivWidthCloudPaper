@@ -1,15 +1,24 @@
-
 import ee
 
-def rwGenSR(aoi = None, WATER_METHOD = 'Jones2019', MAXDISTANCE = 4000, FILL_SIZE = 333, MAXDISTANCE_BRANCH_REMOVAL = 500):
 
+def rwGenSR(
+    aoi=None,
+    WATER_METHOD="Jones2019",
+    MAXDISTANCE=4000,
+    FILL_SIZE=333,
+    MAXDISTANCE_BRANCH_REMOVAL=500,
+):
     grwl = ee.FeatureCollection("users/eeProject/grwl")
     from functions_landsat import CalculateWaterAddFlagsSR
     from functions_river import ExtractRiver
-    from functions_centerline_width import CalculateCenterline, CalculateOrthAngle, CalculateWidth
+    from functions_centerline_width import (
+        CalculateCenterline,
+        CalculateOrthAngle,
+        CalculateWidth,
+    )
 
     # // generate function based on user choice
-    def tempFUN(image, aoi = aoi):
+    def tempFUN(image, aoi=aoi):
         aoi = ee.Algorithms.If(aoi, aoi, image.geometry())
         image = image.clip(aoi)
 
@@ -24,6 +33,6 @@ def rwGenSR(aoi = None, WATER_METHOD = 'Jones2019', MAXDISTANCE = 4000, FILL_SIZ
         # // export widths
         widthOut = CalculateWidth(imgOut)
 
-        return(widthOut)
+        return widthOut
 
-    return(tempFUN)
+    return tempFUN
